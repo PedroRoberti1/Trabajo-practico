@@ -13,9 +13,12 @@
 <body>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-    <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top">
+    <a class="navbar-center" href="#">
+      <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top ">
     </a>
+    <h2>Bienvenido a tus peliculas</h2>
+    <button type="button" class="btn btn-outline-primary">Login</button>
+    
   </div>
 </nav>
     <div class="container mt-5">
@@ -45,31 +48,5 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        Ingrese con su cuenta:
-                    </div>
-                    <form class="p-4" method="POST" action="">
-                        <div class="mb-3">
-                            <label class="form-label">Usuario: </label>
-                            <input type="text" class="form-control" name="" autofocus required maxlength="40">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Contraseña: </label>
-                            <input type="text" class="form-control" name="" autofocus required maxlength="10">
-                        </div>
-                        <div class="d-grid gap-2 text-center">
-                            <input type="hidden" name="oculto" value="1">
-                            <input type="submit" class="btn btn-primary" value="Ingresar">
-                            <a href="create.php">Crear cuenta</a>        
-                            <p class="mt-3 mb-1 text-muted">&copy; Tus Peliculas - Pedro Roberti - Andres Ramirez - Bautista Di Benedetto</p>      
-                        </div>           
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
 
 </html>
