@@ -1,52 +1,75 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <title>Tus peliculas</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Pedro Roberti">
-    <meta name="generator" content="-">
-    <title>Inicio sesion</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
-    <link rel="stylesheet" href="./assets/dist/css/style.css">
-
-    <link href="bootstrap.min.css" rel="stylesheet">
 </head>
-
-<body class="text-center">
-
-    <main class="form-signin w-100 m-auto">
-        <form action="login.php" method="post">
-            <h1 class="h3 mb-2 fw-normal">Bienvenido a Tus Peliculas</h1><br>
-            <img src="./assets/brand/logo.jpg" width="300px" alt="">
-            <h2 class="h3 mb-3 fw-normal" style="color:gray">Ingrese con su cuenta</h1>
-
-                <?php
-                if (isset($_GET['mensaje'])) {
-                    echo '<div id="mensaje" class="alert alert-primary text-center">
-                    <p>' . $_GET['mensaje'] . '</p></div>';
-                }
-                ?>
-
-                <div class="form-floating ">
-                    <input name="usuario" class="form-control" id="floatingInput" placeholder="Usuario">
-                    <label for="floatingInput">Usuario</label>
+<body>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+    <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top">
+    </a>
+  </div>
+</nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <!-- fin alerta -->
+                <div class="card">
+                    <div class="card-header">
+                        Lista de peliculas
+                    </div>
+                    <div class="p-4">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Titulo</th>
+                                    <th scope="col">Año</th>
+                                    <th scope="col">Genero</th>
+                                    <th scope="col">Reseña</th>
+                                    <th scope="col">Disponibilidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí puedes agregar filas a la tabla según tus necesidades -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="form-floating w-100">
-                    <input name="clave" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Contraseña</label>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Ingrese con su cuenta:
+                    </div>
+                    <form class="p-4" method="POST" action="">
+                        <div class="mb-3">
+                            <label class="form-label">Usuario: </label>
+                            <input type="text" class="form-control" name="" autofocus required maxlength="40">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña: </label>
+                            <input type="text" class="form-control" name="" autofocus required maxlength="10">
+                        </div>
+                        <div class="d-grid gap-2 text-center">
+                            <input type="hidden" name="oculto" value="1">
+                            <input type="submit" class="btn btn-primary" value="Ingresar">
+                            <a href="create.php">Crear cuenta</a>        
+                            <p class="mt-3 mb-1 text-muted">&copy; Tus Peliculas - Pedro Roberti - Andres Ramirez - Bautista Di Benedetto</p>      
+                        </div>           
+                    </form>
                 </div>
-
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
-                <a href="create.php">Crear cuenta</a>
-                <p class="mt-3 mb-3 text-muted">&copy; Tus Peliculas-Pedro Roberti-Andres Ramirez-Bautista Di Benedetto</p>
-        </form>
-    </main>
-
-
-
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
