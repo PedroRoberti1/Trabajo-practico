@@ -10,17 +10,17 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 </head>
-<body>
-<nav class="navbar navbar-light bg-light">
+<body><nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-center" href="#">
       <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top ">
     </a>
     <h2>Bienvenido a tus peliculas</h2>
-    <button type="button" class="btn btn-outline-primary">Login</button>
+   <a href="login.php"><button type="button" class="btn btn-outline-primary">Login</button></a> 
     
   </div>
 </nav>
+
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-7">
@@ -47,6 +47,7 @@
                         </table>
                     </div>
                 </div>
+                <p class="mt-3 mb-3 text-muted">&copy; Tus peliculas -Pedro Roberti -  Andres Ramirez - Bautista Di Benedetto </p>
             </div>
 
 </html>
