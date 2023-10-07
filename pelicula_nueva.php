@@ -7,7 +7,19 @@
         <title>Formulario de Película</title>
     </head>
     <body>
-        
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-center" href="index.php">
+                <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top" />
+            </a>
+            <h2>Agregar nueva película</h2>
+            <a href="index.php">
+                <button type="button" class="btn btn-outline-secondary">
+                    Inicio
+                </button>
+            </a>
+        </div>
+    </nav>
         <div class="container mt-4">
             <h2 class="mb-4">Formulario de Película</h2>
             <form action="procesar_formulario.php" method="post">
@@ -46,8 +58,11 @@
         </div><br>
 
         <button type="submit" class="btn btn-primary">Enviar</button>
-        <a href="index.php" class="btn btn-secondary">Cancelar</a>
+        <a href="administrador.php" class="btn btn-secondary">Cancelar</a>
     </form>
+    <p class="mt-3 mb-3 text-muted fixed-bottom text-center">
+            &copy; Tus peliculas | Pedro Roberti • Andrés Ramirez • Bautista DiBenedetto
+    </p>
 </div>
 
 </body>

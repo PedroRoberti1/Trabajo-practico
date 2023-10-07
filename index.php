@@ -12,11 +12,15 @@
 </head>
 <body><nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-center" href="#">
+    <a class="navbar-center" href="index.php">
       <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top ">
     </a>
     <h2>Bienvenido a tus peliculas</h2>
-   <a href="login.php"><button type="button" class="btn btn-outline-primary">Login</button></a> 
+    <div container>
+        <a href="login.php"><button type="button" class="btn btn-outline-primary">Login</button></a> 
+        <!-- Temporal, debería mostrar el nombre de usuario y desaparecer el botón de login -->
+        <a href="administrador.php"><button type="button" class="btn btn-outline-secondary">Admin</button></a> 
+    </div>
     
   </div>
 </nav>
@@ -47,7 +51,7 @@
                         </table>
                     </div>
                 </div>
-                <p class="mt-3 mb-3 text-muted">&copy; Tus peliculas -Pedro Roberti -  Andres Ramirez - Bautista Di Benedetto </p>
+                <p class="mt-3 mb-3 text-muted fixed-bottom text-center">&copy; Tus peliculas | Pedro Roberti • Andrés Ramirez • Bautista Di Benedetto </p>
             </div>
 
 </html>

@@ -16,7 +16,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container">
                 <h2>Ingrese con su usuario:</h2>
-                <a class="navbar-center" href="#">
+                <a class="navbar-center" href="index.php">
                     <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top ">
                 </a>
             </div>
@@ -43,7 +43,7 @@
 
             <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Ingresar</button>
             <a href="create.php">Crear cuenta</a>
-            <p class="mt-3 mb-3 text-muted">&copy; Tus peliculas -Pedro Roberti - Andres Ramirez - Bautista Di Benedetto </p>
+            <p class="mt-3 mb-3 text-muted fixed-bottom text-center">&copy; Tus peliculas | Pedro Roberti • Andrés Ramirez • Bautista Di Benedetto </p>
 
 
 </form>
