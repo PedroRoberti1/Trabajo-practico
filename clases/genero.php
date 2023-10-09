@@ -2,8 +2,7 @@
 
 
 
-
-class genero{
+class Genero{
 
         protected $codigo_genero;
         protected $nombre;

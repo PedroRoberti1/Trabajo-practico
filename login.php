@@ -42,7 +42,7 @@
             </div>
 
             <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Ingresar</button>
-            <a href="create.php">Crear cuenta</a>
+            <a href="nuevo_usuario.php">Crear cuenta</a>
             <p class="mt-3 mb-3 text-muted fixed-bottom text-center">&copy; Tus peliculas | Pedro Roberti • Andrés Ramirez • Bautista Di Benedetto </p>
 
 
