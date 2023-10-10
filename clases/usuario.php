@@ -22,6 +22,19 @@ class Usuario
     {
         return "$this->nombre_usuario";
     }
+    public function setClave($clave)
+    {
+        $this->clave = $clave;
+    }
+    public function getNombre(){
+        return $this->nombre;
+    }
+    public function getApellido(){
+        return $this->apellido;
+    }
+    public function getEmail(){
+        return $this-> email;
+    }
     public function setId($id)
     {
         $this->id = $id;
@@ -30,15 +43,12 @@ class Usuario
     {
         return $this->id;
     }
+
     public function setDatos($nombre_usuario, $nombre, $apellido, $email)
     {
         $this->nombre_usuario = $nombre_usuario;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
         $this->email = $email;
-    }
-    public function setClave($clave)
-    {
-        $this->clave = $clave;
     }
 }
