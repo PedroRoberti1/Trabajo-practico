@@ -1,8 +1,8 @@
 <?php
-require_once 'repositorio_usuario.php';
-require_once 'usuario.php';
+require_once 'RepositorioUsuario.php';
+require_once 'Usuario.php';
 
-class ControladorSesion
+class Controlador_Sesion
 {
 
 	protected $usuario = null;
@@ -10,7 +10,7 @@ class ControladorSesion
 	public function login($nombre_usuario, $clave)
 	{
 
-		$r = new RepositorioUsuario();
+		$r = new Repositorio_Usuario();
 		$usuario = $r->login($nombre_usuario, $clave);
 
 		if ($usuario === false) {

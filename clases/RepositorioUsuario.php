@@ -2,7 +2,7 @@
 require_once '.env.php';
 require_once 'Usuario.php';
 
-class RepositorioUsuario{
+class Repositorio_Usuario{
 
 	private static $conexion = null;
 
