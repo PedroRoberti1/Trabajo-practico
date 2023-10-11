@@ -12,20 +12,23 @@
 
 
 
-<body><nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-center" href="index.php">
-      <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top ">
-    </a>
-    <h2>Bienvenido a tus peliculas</h2>
-    <div container>
-    <a href="login.php"><button type="button" id="boton" class="btn btn-outline-primary">Login</button></a>
-        <!-- Temporal, debería mostrar el nombre de usuario y desaparecer el botón de login -->
-        <a href="administrador.php"><button type="button" class="btn btn-outline-secondary">Admin</button></a> 
-    </div>
-    
-  </div>
-</nav>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-center" href="index.php">
+                <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top ">
+            </a>
+            <h2>Bienvenido a tus peliculas</h2>
+            <div container>
+                <a href="login.php"><button type="button" id="boton" class="btn btn-outline-primary">Login</button></a>
+
+                <!-- Temporal, debería mostrar el nombre de usuario y desaparecer el botón de login -->
+                <a href="index.php"><button type="button" id="Sesion" class="btn btn-outline-primary">Cerrar sesion</button></a>
+                <a href="administrador.php"><button type="button" class="btn btn-outline-secondary">Admin</button></a>
+            </div>
+
+        </div>
+    </nav>
 
 
     <div class="container mt-5">
@@ -56,19 +59,21 @@
                 </div>
                 <p class="mt-3 mb-3 text-muted fixed-bottom text-center">&copy; Tus peliculas | Pedro Roberti • Andrés Ramirez • Bautista Di Benedetto </p>
             </div>
-    
+
 
             <script>
-        <?php
-        session_start();
+                <?php
+                session_start();
 
-        if (isset($_SESSION['usuario'])) {
-            echo 'document.getElementById("boton").style.display = "none";';
-        } else {
-            echo 'document.getElementById("boton").style.display = "block";';
-        }
-        ?>
-    </script>
+                if (isset($_SESSION['usuario'])) {
+                    echo 'document.getElementById("boton").style.display = "none";';
+                    echo 'document.getElementById("Sesion").style.display = "block";';
+                } else {
+                    echo 'document.getElementById("boton").style.display = "block";';
+                    echo 'document.getElementById("Sesion").style.display = "none";';
+                }
+                ?>
+            </script>
 
 </body>
 
