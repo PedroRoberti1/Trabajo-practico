@@ -7,7 +7,7 @@ if (empty($_POST['usuario']) || empty($_POST['clave'])) {
     $cs = new ControladorSesion();
     $login = $cs->login($_POST['usuario'], $_POST['clave']);
     if ($login[0] === true) {
-        $redirigir = 'administrador.php';
+        $redirigir = 'index.php';
     } else {
         $redirigir = 'index.php?mensaje=' . $login[1];
     }
