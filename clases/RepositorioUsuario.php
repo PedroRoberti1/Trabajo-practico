@@ -1,8 +1,8 @@
 <?php 
 require_once '.env.php';
-require_once 'usuario.php';
+require_once 'Usuario.php';
 
-class RepositorioUsuario{
+class Repositorio_Usuario{
 
 	private static $conexion = null;
 
@@ -18,7 +18,7 @@ class RepositorioUsuario{
 			);
 			if (self::$conexion->connect_error){
 				$error = 'Error al conectar:' . self::$conexion->connect_error;
-				self::$conexxion = null;
+				self::$conexion = null;
 				die($error);
 			}
 			self::$conexion->set_charset('utf8mb4');
@@ -46,4 +46,27 @@ class RepositorioUsuario{
 		return false;
 	}
 
+	
+	public function save(Usuario $usuario, $clave){
+		
+		$q = "INSERT INTO usuarios (usuario, clave, nombre, apellido, email)";
+		$q.= "VALUES (?, ?, ?, ?, ?)";
+		$query = self::$conexion->prepare($q);
+		
+		$nombre_usuario = $usuario->getNombreUsuario();
+		
+		$clave_encriptada = password_hash($clave, PASSWORD_DEFAULT);
+		
+		$nombre = $usuario->getNombre();
+		$apellido = $usuario->getApellido();
+		$email = $usuario->getEmail();	
+		$query->bind_param("sssss", $nombre_usuario, $clave_encriptada, $nombre, $apellido, $email);
+	
+	if ($query->execute()){
+		return self::$conexion->insert_id;
+	} else{
+		
+		return false;
+	}
+}
 }
