@@ -23,9 +23,7 @@
                 <a href="login.php"><button type="button" id="boton" class="btn btn-outline-primary">Login</button></a>
 
                 <!-- Temporal, debería mostrar el nombre de usuario y desaparecer el botón de login -->
-                <form action="logout.php" method="post">
-                <a href="login.php"><button type="button" id="Sesion" class="btn btn-outline-primary">Cerrar sesion</button></a>
-                </form>
+                <a href="logout.php"><button type="button" id="Sesion" class="btn btn-outline-primary">Cerrar sesion</button></a>
                 <a href="administrador.php"><button type="button" class="btn btn-outline-secondary">Admin</button></a>
             </div>
 
