@@ -9,7 +9,7 @@ if (empty($_POST['usuario']) || empty($_POST['clave'])) {
     if ($login[0] === true) {
         $redirigir = 'index.php';
     } else {
-        $redirigir = 'index.php?mensaje=' . $login[1];
+        $redirigir = 'login.php?mensaje=' . $login[1];
     }
 }
 header('Location: '.$redirigir);

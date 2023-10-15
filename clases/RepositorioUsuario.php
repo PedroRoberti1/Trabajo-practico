@@ -1,6 +1,6 @@
 <?php 
 require_once '.env.php';
-require_once 'Usuario.php';
+require_once 'usuario.php';
 
 class Repositorio_Usuario{
 
