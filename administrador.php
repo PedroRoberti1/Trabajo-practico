@@ -1,4 +1,14 @@
 <?php
+session_start();
+if (isset($_SESSION['usuario'])) {
+    
+    $usuario = unserialize($_SESSION['usuario']);
+} else {
+    
+    header('Location: index.php');
+}
+
+
 require_once './clases/Pelicula.php';
 
 $pelicula1 = new Pelicula("Titanic", "1997", "Drama", "Buena ~ 4.3/5", "Star +", 1);
