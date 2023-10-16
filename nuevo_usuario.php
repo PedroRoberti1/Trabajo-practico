@@ -43,7 +43,7 @@ if (isset($_POST['usuario']) && isset($_POST['clave'])) {
         }
         ?>
 
-        <form action="" method="post">
+        <form action="nuevo_usuario.php" method="post">
             <input name="usuario" class="form-control form-control-lg" placeholder="Usuario"><br>
 
             <input name="clave" type="password" class="form-control form-control-lg" placeholder="Contraseña"><br>
