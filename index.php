@@ -24,7 +24,7 @@
 
                 <!-- Temporal, debería mostrar el nombre de usuario y desaparecer el botón de login -->
                 <a href="logout.php"><button type="button" id="Sesion" class="btn btn-outline-primary">Cerrar sesion</button></a>
-                <a href="administrador.php"><button type="button" class="btn btn-outline-secondary">Admin</button></a>
+                <a href="administrador.php"><button type="button" id="admin" class="btn btn-outline-secondary">Admin</button></a>
             </div>
 
         </div>
@@ -68,9 +68,12 @@
                 if (isset($_SESSION['usuario'])) {
                     echo 'document.getElementById("boton").style.display = "none";';
                     echo 'document.getElementById("Sesion").style.display = "block";';
+                    echo 'document.getElementById("admin").style.display = "block";';
+
                 } else {
                     echo 'document.getElementById("boton").style.display = "block";';
                     echo 'document.getElementById("Sesion").style.display = "none";';
+                    echo 'document.getElementById("admin").style.display = "none";';
                 }
                 ?>
             </script>
