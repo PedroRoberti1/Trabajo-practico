@@ -1,6 +1,6 @@
 <?php
 require_once 'RepositorioUsuario.php';
-require_once 'usuario.php';
+require_once 'Usuario.php';
 
 class Controlador_Sesion
 {
@@ -23,4 +23,21 @@ class Controlador_Sesion
 			return [true, "Ingreso correcto"];
 		}
 	}
+
+	public function create($nombre_usuario, $nombre, $apellido, $clave, $email)
+	{
+
+		$r = new Repositorio_Usuario();
+		$usuario = new Usuario($nombre_usuario, $clave, $nombre, $apellido, $email);
+		$id = $r->save($usuario, $clave);
+		if ($id === false) {
+			return [false, "No se pudo crear el usuario"];
+		} else {
+			$usuario->setId($id);
+			session_start();
+			$_SESSION['usuario'] = serialize($usuario);
+			return [true, "Usuario creado con exito!"];
+		}
+}
+
 }
