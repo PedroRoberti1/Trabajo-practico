@@ -7,9 +7,9 @@ if (isset($_POST['usuario']) && isset($_POST['clave'])) {
     $result = $cs->create($_POST['usuario'], $_POST['nombre'], 
     $_POST['apellido'], $_POST['clave'], $_POST['email']);
     if ($result[0] === true) {
-        $redirigir = 'home.php?mensaje=' . $result[1];
+        $redirigir = 'index.php?mensaje=' . $result[1];
     } else {
-        $redirigir = 'create.php?mensaje=' . $result[1];
+        $redirigir = 'nuevo_usuario.php?mensaje=' . $result[1];
     }
     header('Location: ' . $redirigir);
 }

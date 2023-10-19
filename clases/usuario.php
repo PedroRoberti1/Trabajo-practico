@@ -3,15 +3,13 @@ class Usuario
 {
     protected $id;
     protected $nombre_usuario;
-    protected $clave;
     protected $nombre;
     protected $apellido;
     protected $email;
 
-    public function __construct($nombre_usuario, $clave, $nombre, $apellido, $email, $id = null)
+    public function __construct($nombre_usuario, $nombre, $apellido, $email, $id = null)
     {
         $this->nombre_usuario = $nombre_usuario;
-        $this->clave = $clave;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
         $this->email = $email;
@@ -21,10 +19,6 @@ class Usuario
     public function getNombreUsuario()
     {
         return "$this->nombre_usuario";
-    }
-    public function setClave($clave)
-    {
-        $this->clave = $clave;
     }
     public function getNombre(){
         return $this->nombre;

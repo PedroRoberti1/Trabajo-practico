@@ -1,3 +1,11 @@
+<?php
+require_once 'clases/ControladorPeliculas.php';
+
+session_start();
+$cp = new ControladorPeliculas();
+
+$peliculas = $cp->getAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +26,7 @@
             <a class="navbar-center" href="index.php">
                 <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top ">
             </a>
-            <h2>Bienvenido a tus peliculas</h2>
+            <h2>Bienvenido a <strong>Tus películas</strong></h2>
             <div container>
                 <a href="login.php"><button type="button" id="boton" class="btn btn-outline-primary">Login</button></a>
 
@@ -37,22 +45,40 @@
                 <!-- fin alerta -->
                 <div class="card">
                     <div class="card-header">
-                        Lista de peliculas
+                        Lista de peliculas agregadas por usuarios
                     </div>
                     <div class="p-4">
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Titulo</th>
-                                    <th scope="col">Año</th>
-                                    <th scope="col">Genero</th>
-                                    <th scope="col">Reseña</th>
-                                    <th scope="col">Disponibilidad</th>
+                                    <th scope="col" class="text-center">Titulo</th>
+                                    <th scope="col" class="text-center">Año</th>
+                                    <th scope="col" class="text-center">Genero</th>
+                                    <th scope="col" class="text-center">Reseña</th>
+                                    <th scope="col" class="text-center">Disponibilidad</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Aquí puedes agregar filas a la tabla según tus necesidades -->
+                            <?php
+                                if (count($peliculas) === 0) {
+                                    echo
+                                        '<tr>
+                                        <th colspan="6" class="text-center"><h2>No se agregaron películas aún</h2></th>
+                                    </tr>';
+                                // }
+                                } else {
+                                    foreach ($peliculas as $pelicula) {
+                                        echo
+                                            '<tr>
+                                        <th scope="col" class="text-secondary text-center">' . $pelicula->getTitulo() . '</th>
+                                        <th scope="col" class="text-secondary text-center">' . $pelicula->getAnio() . '</th>
+                                        <th scope="col" class="text-secondary text-center">' . $pelicula->getGenero()->getNombre() . '</th>
+                                        <th scope="col" class="text-secondary text-center">' . $pelicula->getResenia() . '</th>
+                                        <th scope="col" class="text-secondary text-center">' . $pelicula->getDisponibilidad() . '</th>
+                                    </tr>';
+                                    }
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -63,7 +89,6 @@
 
             <script>
                 <?php
-                session_start();
 
                 if (isset($_SESSION['usuario'])) {
                     echo 'document.getElementById("boton").style.display = "none";';

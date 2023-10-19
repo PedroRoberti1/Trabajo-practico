@@ -1,6 +1,5 @@
 <?php
-
-
+require_once 'Genero.php';
 class Pelicula
 {
     protected $id;
@@ -9,15 +8,17 @@ class Pelicula
     protected $genero;
     protected $disponibilidad;
     protected $resenia;
+    protected $id_usuario;
 
 
-    public function __construct ($titulo, $anio, $genero, $disponibilidad, $resenia, $id=null)
+    public function __construct ($titulo, $anio, Genero $genero, $disponibilidad, $resenia, $id_usuario, $id=null)
     {
         $this->titulo = $titulo;
         $this->anio = $anio;
         $this->genero = $genero;
         $this->disponibilidad = $disponibilidad;
         $this->resenia = $resenia;
+        $this->id_usuario = $id_usuario;
         $this->id = $id;
     }
 
@@ -41,6 +42,10 @@ class Pelicula
     public function getResenia() {
 	return $this->resenia;
 	}
+
+    public function getIdUsuario() {
+        return $this->id_usuario;    
+    }
 
     public function getId() {
 	return $this->id;

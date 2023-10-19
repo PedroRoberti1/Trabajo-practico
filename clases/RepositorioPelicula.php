@@ -2,59 +2,66 @@
 
 require_once 'Usuario.php';
 require_once 'Pelicula.php';
-require_once '.env.php';
+require_once 'genero.php';
+require_once 'Repositorio.php';
 
-class Repositorio_Pelicula
+class Repositorio_Pelicula extends Repositorio
 {
 
-    private static $conexion = null;
-
-    public function __construct()
+    public function get_all($id_usuario = null)
     {
+        $sql = "SELECT ";
+        $sql .= "p.id_pelicula, p.titulo, p.anio,  p.disponibilidad, p.resenia, p.id_usuario, ";
+        $sql .= "g.nombre, g.codigo_genero ";
+        $sql .= "FROM Peliculas p ";
+        $sql .= "INNER JOIN genero g ON p.id_genero = g.codigo_genero ";
 
-        if (is_null(self::$conexion)) {
-            $credenciales = credenciales();
-            self::$conexion = new mysqli(
-                $credenciales['servidor'],
-                $credenciales['usuario'],
-                $credenciales['clave'],
-                $credenciales['base_de_datos']
-            );
-            if (self::$conexion->connect_error) {
-                $error = 'Error al conectar:' . self::$conexion->connect_error;
-                self::$conexxion = null;
-                die($error);
-            }
-            self::$conexion->set_charset('utf8mb4');
+        if ($id_usuario) {
+            $sql .= "WHERE p.id_usuario = ? ";
         }
-    }
 
+        $sql .= "ORDER BY p.id_pelicula;";
 
-    //creamos la funcion de agregar juegos al crud
+        // var_dump($sql); die();
+        $query = self::$conexion->prepare($sql);
 
-    public function getPeliculas()
-    {
-        $q = "SELECT * FROM peliculas";
-        $query = self::$conexion->prepare($q);
+        if ($id_usuario) {
+            // Si el filtro NO es nulo, relacionamos $filtro con el parámetro"?"
+            $query->bind_param("i", $id_usuario);
+        }
 
         if ($query->execute()) {
-            $query->bind_result($id, $titulo, $anio, $genero, $disponibilidad, $resenia);
-            $lista_de_peliculas = [];
+
+            $query->bind_result(
+                $id,
+                $titulo,
+                $anio,
+                $disponibilidad,
+                $resenia,
+                $id_usuario,
+                $nombre_g,
+                $id_g
+            );
+
+            $peliculas = [];
+
             while ($query->fetch()) {
-                $lista_de_peliculas[] = new Pelicula($id, $titulo, $anio, $genero, $disponibilidad, $resenia);
+                $g = new Genero($id_g, $nombre_g);
+
+                $p = new Pelicula($titulo, $anio, $g, $disponibilidad, $resenia, $id_usuario, $id);
+
+                $peliculas[] = $p;
             }
-            return $lista_de_peliculas;
+            return $peliculas;
         }
-        return false;
     }
 
     public function agregar(Pelicula $p)
-
     {
 
         // Preparamos la query del update
-        $q = "INSERT INTO peliculas (titulo, anio, genero, disponibilidad, resenia) VALUES (?, ?, ?, ?, ?)";
-        $query = self::$conexion->prepare($q);
+        $sql = "INSERT INTO peliculas (titulo, anio, id_genero, id_usuario, resenia, disponibilidad) VALUES (?, ?, ?, ?, ?, ?);";
+        $query = self::$conexion->prepare($sql);
 
         // Obtenemos los nuevos valores desde el objeto:
         $titulo = $p->getTitulo();
@@ -62,18 +69,48 @@ class Repositorio_Pelicula
         $genero = $p->getGenero();
         $disponibilidad = $p->getDisponibilidad();
         $resenia = $p->getResenia();
-        
+        $id_usuario = $p->getIdUsuario();
+
 
         // Asignamos los valores para reemplazar los "?" en la query
-        if (!$query->bind_param("sss", $id, $titulo, $anio, $genero, $disponibilidad, $resenia)) {
+        if (!$query->bind_param("siiiss", $titulo, $anio, $genero->getCodigo_genero(), $id_usuario, $resenia, $disponibilidad)) {
             echo "fallo la consulta";
         }
 
         // Retornamos true si la query tiene éxito, false si fracasa
-        if ($query->execute()) {
-            return true;
-        } else {
-            return false;
+        return $query->execute();
+    }
+
+    public function borrar($pelicula_id)
+    {
+        $sql = "DELETE FROM peliculas WHERE id_pelicula = ?;";
+        $query = self::$conexion->prepare($sql);
+
+        if (!$query->bind_param("i", $pelicula_id)) {
+            echo "fallo la consulta";
         }
+
+        return $query->execute();
+    }
+
+    public function modificar(Pelicula $p)
+    {
+        $sql = "UPDATE peliculas SET titulo = ?, anio = ?, id_genero = ?, disponibilidad = ?, resenia = ? ";
+        $sql .= "WHERE id_pelicula = ?;";
+
+        $query = self::$conexion->prepare($sql);
+
+        $titulo = $p->getTitulo();
+        $anio = $p->getAnio();
+        $genero = $p->getGenero();
+        $disponibilidad = $p->getDisponibilidad();
+        $resenia = $p->getResenia();
+        $id = $p->getId();
+
+        if (!$query->bind_param("siissi", $titulo, $anio, $genero->getCodigo_genero(), $disponibilidad, $resenia, $id)) {
+            echo "fallo la consulta";
+        }
+
+        return $query->execute();
     }
 }
