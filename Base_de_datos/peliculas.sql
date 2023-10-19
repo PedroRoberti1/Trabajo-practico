@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2023 a las 23:17:23
+-- Tiempo de generación: 10-10-2023 a las 16:54:25
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -24,22 +24,61 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `genero`
+--
+
+CREATE TABLE `genero` (
+  `codigo_genero` int(255) NOT NULL,
+  `nombre` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `peliculas`
 --
 
 CREATE TABLE `peliculas` (
   `id_pelicula` int(255) NOT NULL,
   `titulo` varchar(30) NOT NULL,
-  `anio` date NOT NULL,
+  `ano` date NOT NULL,
   `id_genero` int(255) NOT NULL,
   `id_usuario` int(255) NOT NULL,
-  `resenia` varchar(40) NOT NULL,
+  `resena` varchar(40) NOT NULL,
   `disponibilidad` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(255) NOT NULL,
+  `usuario` varchar(45) NOT NULL,
+  `clave` varchar(255) NOT NULL,
+  `nombre` varchar(200) NOT NULL,
+  `apellido` varchar(200) NOT NULL,
+  `email` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `usuario`, `clave`, `nombre`, `apellido`, `email`) VALUES
+(1, 'ejemplo', '$2y$10$MKEZOE1o/HEE2KAgDMBkq.j6kjw0tiu.FGMSKLdi9wU8MMDQIlpFO', 'Fulano', 'de Tal', 'pedroroberti99@gmail.com');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `genero`
+--
+ALTER TABLE `genero`
+  ADD PRIMARY KEY (`codigo_genero`);
 
 --
 -- Indices de la tabla `peliculas`
@@ -48,6 +87,12 @@ ALTER TABLE `peliculas`
   ADD PRIMARY KEY (`id_pelicula`),
   ADD KEY `peliculas_ibfk_1` (`id_genero`),
   ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -60,6 +105,12 @@ ALTER TABLE `peliculas`
   MODIFY `id_pelicula` int(255) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -67,7 +118,7 @@ ALTER TABLE `peliculas`
 -- Filtros para la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
-  ADD CONSTRAINT `peliculas_ibfk_1` FOREIGN KEY (`id_genero`) REFERENCES `genero` (`Codigo_genero`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `peliculas_ibfk_1` FOREIGN KEY (`id_genero`) REFERENCES `genero` (`codigo_genero`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `peliculas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
