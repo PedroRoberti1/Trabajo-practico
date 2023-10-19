@@ -32,6 +32,19 @@ CREATE TABLE `genero` (
   `nombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `genero`
+--
+
+INSERT INTO `genero`(`codigo_genero`, `nombre`) VALUES (1,'drama');
+INSERT INTO `genero`(`codigo_genero`, `nombre`) VALUES (2,'ciencia ficción');
+INSERT INTO `genero`(`codigo_genero`, `nombre`) VALUES (3,'romance');
+INSERT INTO `genero`(`codigo_genero`, `nombre`) VALUES (4,'comedia');
+INSERT INTO `genero`(`codigo_genero`, `nombre`) VALUES (5,'documental');
+INSERT INTO `genero`(`codigo_genero`, `nombre`) VALUES (6,'policial');
+INSERT INTO `genero`(`codigo_genero`, `nombre`) VALUES (7,'superhéroes');
+INSERT INTO `genero`(`codigo_genero`, `nombre`) VALUES (8,'otro');
+
 -- --------------------------------------------------------
 
 --
@@ -41,10 +54,10 @@ CREATE TABLE `genero` (
 CREATE TABLE `peliculas` (
   `id_pelicula` int(255) NOT NULL,
   `titulo` varchar(30) NOT NULL,
-  `ano` date NOT NULL,
+  `anio` int(255) NOT NULL,
   `id_genero` int(255) NOT NULL,
   `id_usuario` int(255) NOT NULL,
-  `resena` varchar(40) NOT NULL,
+  `resenia` varchar(40) NOT NULL,
   `disponibilidad` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
