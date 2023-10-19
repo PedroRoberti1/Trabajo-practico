@@ -1,22 +1,19 @@
 <?php
+require_once 'clases/ControladorPeliculas.php';
+require_once './clases/Pelicula.php';
+
 session_start();
 if (isset($_SESSION['usuario'])) {
-    
+
     $usuario = unserialize($_SESSION['usuario']);
 } else {
-    
+
     header('Location: index.php');
 }
 
+$cp = new ControladorPeliculas($usuario->getId());
 
-require_once './clases/Pelicula.php';
-
-$pelicula1 = new Pelicula("Titanic", "1997", "Drama", "Buena ~ 4.3/5", "Star +", 1);
-$pelicula2 = new Pelicula("Avatar", "2009", "Ciencia ficción", "Muy buena ~ 4.5/5", "Disney +", 2);
-$pelicula3 = new Pelicula("Misión imposible", "1996", "Acción", "Buena ~ 4.2/5", "Paramount +", 3);
-$pelicula4 = new Pelicula("Halloween", "1978", "Slasher", "Promedio ~ 3.9/5", "Amazon Prime", 4);
-
-$peliculas = array($pelicula1, $pelicula2, $pelicula3, $pelicula4);
+$peliculas = $cp->getPeliculasPropias($usuario->getId());
 
 ?>
 <!DOCTYPE html>
@@ -26,8 +23,11 @@ $peliculas = array($pelicula1, $pelicula2, $pelicula3, $pelicula4);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/style.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
     <title>Tus películas • Perfil usuario</title>
 </head>
 
@@ -35,7 +35,8 @@ $peliculas = array($pelicula1, $pelicula2, $pelicula3, $pelicula4);
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-center" href="index.php">
-                <img src="./assets/brand/logo.jpg" alt="logo-tus-peliculas" width="150" height="50" class="d-inline-block align-text-top" />
+                <img src="./assets/brand/logo.jpg" alt="logo-tus-peliculas" width="150" height="50"
+                    class="d-inline-block align-text-top" />
             </a>
             <h2>Perfil administrar</h2>
             <a href="index.php"><button type="button" class="btn btn-outline-secondary">
@@ -52,6 +53,12 @@ $peliculas = array($pelicula1, $pelicula2, $pelicula3, $pelicula4);
                         Agregar nueva película
                     </button>
                 </a>
+                <?php
+                if (isset($_GET['mensaje'])) {
+                    echo '<div id="mensaje" class="alert alert-' . ($_GET['tipo']) . ' text-center" role="alert">
+                    <p>' . $_GET['mensaje'] . '</p></div>';
+                }
+                ?>
                 <!-- fin alerta -->
                 <div class="card">
                     <div class="card-header">Películas creadas</div>
@@ -71,19 +78,19 @@ $peliculas = array($pelicula1, $pelicula2, $pelicula3, $pelicula4);
                                 <?php
                                 if (count($peliculas) === 0) {
                                     echo
-                                    '<tr>
+                                        '<tr>
                                         <th colspan="6" class="text-center"><h2>No agregó películas aún</h2></th>
                                     </tr>';
                                 } else {
-                                foreach ($peliculas as $pelicula) {
-                                    echo
-                                    '<tr>
+                                    foreach ($peliculas as $pelicula) {
+                                        echo
+                                            '<tr>
                                         <th scope="col" class="text-secondary text-center">' . $pelicula->getTitulo() . '</th>
                                         <th scope="col" class="text-secondary text-center">' . $pelicula->getAnio() . '</th>
-                                        <th scope="col" class="text-secondary text-center">' . $pelicula->getGenero() . '</th>
+                                        <th scope="col" class="text-secondary text-center">' . $pelicula->getGenero()->getNombre() . '</th>
                                         <th scope="col" class="text-secondary text-center">' . $pelicula->getResenia() . '</th>
                                         <th scope="col" class="text-secondary text-center">' . $pelicula->getDisponibilidad() . '</th>
-                                        <th scope="col" id="'.$pelicula->getId().'">
+                                        <th scope="col">
                                             <div class="dropdown">
                                                 <button class="btn btn-outline-info dropdown-toggle" type="button"
                                                     id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -92,13 +99,14 @@ $peliculas = array($pelicula1, $pelicula2, $pelicula3, $pelicula4);
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-dark"
                                                     aria-labelledby="dropdownMenuButton1">
-                                                    <li><a class="dropdown-item">Editar</a></li>
-                                                    <li><a class="dropdown-item">Borrar</a></li>
+                                                    <li><a href="pelicula_nueva.php?id_pelicula=' . $pelicula->getId() . '&titulo=' . $pelicula->getTitulo() . '&anio=' . $pelicula->getAnio() . '&disponibilidad=' . $pelicula->getDisponibilidad() . '&genero=' . $pelicula->getGenero()->getCodigo_genero() . '&resenia=' . $pelicula->getResenia() . '&id_usuario=' . $usuario->getId() . '" class="dropdown-item">Editar</a></li>
+                                                    <li><a href="confirmar_borrar_pelicula.php?id_pelicula=' . $pelicula->getId() . '&titulo=' . $pelicula->getTitulo() . '&id_usuario=' . $usuario->getId() . '" class="dropdown-item">Borrar</a></li>
                                                 </ul>
                                             </div>
                                         </th>
                                     </tr>';
-                                }}
+                                    }
+                                }
                                 ?>
                             </tbody>
                         </table>
