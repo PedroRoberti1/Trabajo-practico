@@ -109,7 +109,7 @@ if (isset($_POST['titulo']) && isset($_POST['anio']) && isset($_POST['genero']))
                 <label for="disponibilidad">Disponibilidad:</label>
                 <select class="form-control" name="disponibilidad">
                     <option value="disponible" <?php echo $id_pelicula ? ($_GET['disponibilidad'] === "disponible" ? 'selected' : '') : '' ?>>Disponible</option>
-                    <option value="no_disponible" <?php echo $id_pelicula ? ($_GET['disponibilidad'] === "no_disponible" ? 'selected' : '') : '' ?>>No disponible</option>
+                    <option value="no disponible" <?php echo $id_pelicula ? ($_GET['disponibilidad'] === "no disponible" ? 'selected' : '') : '' ?>>No disponible</option>
                 </select>
             </div>
 

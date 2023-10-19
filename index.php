@@ -26,7 +26,7 @@ $peliculas = $cp->getAll();
             <a class="navbar-center" href="index.php">
                 <img src="./assets/brand/logo.jpg" alt="" width="150" height="50" class="d-inline-block align-text-top ">
             </a>
-            <h2>Bienvenido a tus peliculas</h2>
+            <h2>Bienvenido a <strong>Tus películas</strong></h2>
             <div container>
                 <a href="login.php"><button type="button" id="boton" class="btn btn-outline-primary">Login</button></a>
 
@@ -45,7 +45,7 @@ $peliculas = $cp->getAll();
                 <!-- fin alerta -->
                 <div class="card">
                     <div class="card-header">
-                        Lista de peliculas
+                        Lista de peliculas agregadas por usuarios
                     </div>
                     <div class="p-4">
                         <table class="table align-middle">
